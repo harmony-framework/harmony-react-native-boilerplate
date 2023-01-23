@@ -1,0 +1,31 @@
+{
+    "flowTypes": {
+        "DemoFlow": "DemoFlow"
+    },
+    "subFlowTypes": {},
+    "stepTypes": {
+        "DEMO_PAGE_ONE": {
+            "name": "DEMO_PAGE_ONE",
+            "displayName": "Demo Page One",
+            "path": "DemoPageOne"
+        },
+        "DEMO_PAGE_TWO": {
+            "name": "DEMO_PAGE_TWO",
+            "displayName": "Demo Page Two",
+            "path": "DemoPageTwo"
+        },
+        "DEMO_PAGE_THREE": {
+            "name": "DEMO_PAGE_THREE",
+            "displayName": "Demo Page Three",
+            "path": "DemoPageThree"
+        }
+    },
+    "conditions": [
+        {
+            "conditionName": "trueCondition",
+            "onCheck": "trueCondition",
+            "displayName": "True Condition",
+            "description": "True Condition Demo"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+[
+    {
+        "flowName": "defaultScenario",
+        "color": "#9b9b9b",
+        "conditions": [
+            {
+                "conditionName": "trueCondition",
+                "onCheck": "trueCondition",
+                "displayName": "Default Success",
+                "description": "Return Always Success to be used for every Flow as Default Scenario"
+            }
+        ],
+        "runInFlowTypes": [
+            "DemoFlow"
+        ]
+    }
+]

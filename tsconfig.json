@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+	  "jsx": "react",
+	  "baseUrl": ".",
+	  "moduleResolution": "node",
+	  "paths": {
+		"@base/*": ["./src/base/*"],
+		"@actions/*": ["./src/actions/*"],
+		"@utils/*": ["./src/utils/*"],
+		"@config": ["./src/config"],
+		"@configurations/*": ["./src/configurations/*"]
+	},
+	"resolveJsonModule": true,
+	"esModuleInterop": true
+  },
+  "extends": "@tsconfig/react-native/tsconfig.json"
+}

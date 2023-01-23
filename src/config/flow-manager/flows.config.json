@@ -1,0 +1,14 @@
+{
+    "DemoFlow": {
+        "defaultScenario": {
+            "id": "47ffd10e-711e-4925-a2a3-e0927b67924b",
+            "steps": [
+				"DEMO_PAGE_ONE",
+				"DEMO_PAGE_TWO",
+				"DEMO_PAGE_THREE"
+
+            ],
+            "description": "default"
+        }
+    }
+}
