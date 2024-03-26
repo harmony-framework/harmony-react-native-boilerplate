@@ -1,27 +1,30 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { persistStore } from 'redux-persist';
+import {createStore, applyMiddleware, compose} from 'redux';
+import {persistStore} from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import ReactotronConfig from '../../../config/reactotron.config';
-const createDebugger = require("redux-flipper").default;
+// const createDebugger = require("redux-flipper").default;
 
-import { globalStoreListener, STORE_ACTION_LISTENERS } from '../base-services';
+import {globalStoreListener, STORE_ACTION_LISTENERS} from '../base-services';
 // import { config } from 'config';
-import { rootReducer, rootSaga } from '../../../actions';
-import { SystemActions } from '../../../actions/system/redux';
-
+import {rootReducer, rootSaga} from '../../../actions';
+import {SystemActions} from '../../../actions/system/redux';
+import {composeWithDevTools} from 'remote-redux-devtools';
 /* --------- define middleware ---------- */
 
-export const globalActionListener = (/* store */) => (next: any) => (action: any) => {
-	const result = next(action);
-	globalStoreListener.publish(STORE_ACTION_LISTENERS, action);
-	return result;
-};
+export const globalActionListener =
+  (/* store */) => (next: any) => (action: any) => {
+    const result = next(action);
+    globalStoreListener.publish(STORE_ACTION_LISTENERS, action);
+    return result;
+  };
 
 const sagaMiddleware = createSagaMiddleware();
-
+console.log(window.__REDUX_DEVTOOLS_EXTENSION__);
 /* -------- create the store with middleware ---------- */
-let customCompose = compose(applyMiddleware(sagaMiddleware, globalActionListener, createDebugger()), ReactotronConfig.createEnhancer!());
-
+let customCompose = composeWithDevTools(
+  applyMiddleware(sagaMiddleware, globalActionListener /*, createDebugger()*/),
+  ReactotronConfig.createEnhancer!(),
+);
 
 const store = createStore(rootReducer, customCompose);
 
@@ -33,5 +36,3 @@ sagaMiddleware.run(rootSaga);
 /* -------- expose store functionality to page level ------------- */
 export const persistor = persistStore(store);
 export default store;
-
-

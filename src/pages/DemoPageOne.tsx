@@ -6,6 +6,7 @@
  */
 
 import {FlowManagerActions} from '@actions/flowManager/redux';
+import {SystemActions} from '../actions/system/redux';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {
   NavigatorScreenParams,
@@ -17,8 +18,14 @@ import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
 import FlowManagerConfig from '../config/flow-manager/types.json';
 import {useTranslation} from 'react-i18next';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  useColorScheme,
+} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch} from 'react-redux';
 import useTheme from 'src/theme/useTheme';
 import useThemedStyles from 'src/theme/useThemedStyles';
@@ -50,6 +57,32 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
+function Section({children, title}: SectionProps): JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View style={styles.sectionContainer}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+      </Text>
+      <Text
+        style={[
+          styles.sectionDescription,
+          {
+            color: isDarkMode ? Colors.light : Colors.dark,
+          },
+        ]}>
+        {children}
+      </Text>
+    </View>
+  );
+}
+
 function DemoPageOne({
   navigation,
 }: CompositeScreenProps<
@@ -79,13 +112,16 @@ function DemoPageOne({
       };
     }, []),
   );
+  useEffect(() => {
+    // dispatch(SystemActions.systemInitStart());
+  });
   return (
     <SafeAreaView style={style.safeAreaView}>
       <View style={style.mainContainer}>
         <Text style={style.mb}>Secondary Button</Text>
         <Button
           buttonAction={() => {
-            changeLanguage('de');
+            changeLanguage(i18n.language === 'de' ? 'en' : 'de');
           }}
           buttonText={t('changeLanguage')!}
           isSecondary
@@ -106,6 +142,15 @@ function DemoPageOne({
           }}
           buttonText="Change theme"
           isFullWidth
+          toValue={0.99}
+        />
+        <Text style={style.mb}>Journey Manager</Text>
+
+        <Button
+          buttonAction={() => {
+            dispatch(FlowManagerActions.moveToNextStep());
+          }}
+          buttonText="Go to next page"
           toValue={0.99}
         />
         <View style={style.progressBar}>

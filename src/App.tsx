@@ -6,6 +6,7 @@ import ReactotronConfig from './config/reactotron.config';
 import Navigator from './pages/Navigator';
 import {PendingTasks} from '@base/features/base-global-spinner/reducer';
 import ThemeProvider from './theme/ThemeProvider';
+
 import './translations';
 interface Props {
   pendingTasks: PendingTasks;
